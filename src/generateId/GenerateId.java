@@ -1,4 +1,4 @@
-package model;
+package generateId;
 
 public class GenerateId {
     public static Long bookId = 0L;

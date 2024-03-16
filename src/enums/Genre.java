@@ -1,2 +1,7 @@
-package enums;public class Genre {
+package enums;
+
+public enum Genre {
+    POEM,STORY,PLAY,
+    FANTASTIC,ROMANCE,LITERATURE;
+
 }

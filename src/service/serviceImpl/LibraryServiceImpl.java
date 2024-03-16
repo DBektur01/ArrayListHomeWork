@@ -1,29 +1,29 @@
-package serviceImpl;
+package service.serviceImpl;
+
 
 import model.Library;
+import model.db.Database;
 import service.LibraryService;
 
-import java.util.ArrayList;
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public class LibraryServiceImpl implements LibraryService {
-
-    List<Library>libraries=new ArrayList<>();
-
     @Override
     public List<Library> saveLibrary(List<Library> libraries) {
-        return null;
-    }
-
-    @Override
-    public List<Library> getAllLibraries() {
+        Database.libraries.addAll(libraries);
         return libraries;
     }
 
     @Override
+    public List<Library> getAllLibraries() {
+        return Database.libraries;
+    }
+
+    @Override
     public Library getLibraryById(Long id) {
-        for (Library library:libraries){
-            if (library.getId()==id){
+        for (Library library : Database.libraries) {
+            if (library.getId().equals(id)) {
                 return library;
             }
         }
@@ -32,21 +32,25 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Library updateLibrary(Long id, Library library) {
-        for (Library library1:libraries){
-            if (library1.getId()==id){
-                libraries.add(library);
+        for (int i = 0; i <Database.libraries.size(); i++) {
+            Library library1=Database.libraries.get(i);
+            if (library1.getId().equals(id)) {
+                Database.libraries.set(i,library);
+                return library;
             }
         }
         return library;
     }
-
     @Override
     public String deleteLibrary(Long id) {
-        for (Library library:libraries){
-            if (library.getId()==id){
-                libraries.remove(library);
+        for (Library library : Database.libraries) {
+            if (library.getId().equals(id)) {
+                Database.libraries.remove(library);
+                return "Library with ID " + id + " deleted successfully.";
             }
         }
-        return "Successfully deleted";
+        return "Library with ID " + id + " not found.";
     }
 }
+
+

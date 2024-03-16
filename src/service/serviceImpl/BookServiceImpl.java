@@ -1,32 +1,29 @@
-package serviceImpl;
+package service.serviceImpl;
 
 import model.Book;
-import model.Library;
-import service.BookService;
 
-import java.util.ArrayList;
+import model.Library;
+import model.db.Database;
+import service.BookService;
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
 
-    List<Book>books=new ArrayList<>();
-    List<Library>libraries = new ArrayList<>();
-
     @Override
     public Book saveBook(Long libraryId, Book book) {
-        for (Library library:libraries){
-            if (library.getId()==libraryId){
-                books.add(book);
+        for (Library library: Database.libraries){
+            if (library.getId().equals(libraryId)){
+                Database.books.add(book);
             }
         }
-        return null;
+        return book;
     }
 
     @Override
     public List<Book> getAllBooks(Long libraryId) {
-        for (Library library:libraries){
-            if (library.getId()==libraryId){
-                return books;
+        for (Library library:Database.libraries){
+            if (library.getId().equals(libraryId)){
+                return Database.books;
             }
         }
         return null;
@@ -34,10 +31,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(Long libraryId, Long bookId) {
-        for (Library library:libraries){
-            if (library.getId()==libraryId){
-                for (Book book:books){
-                    if (book.getId()==bookId){
+        for (Library library:Database.libraries){
+            if (library.getId().equals(libraryId)){
+                for (Book book:Database.books){
+                    if (book.getId().equals(bookId)){
                         return book;
                     }
                 }
@@ -47,24 +44,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public String deleteBook(Long libraryId, Long bookId) {
-        for (Library library:libraries){
-            if (library.getId()==libraryId){
-                for (Book book:books){
-                    if(book.getId()==bookId){
-                        libraries.remove(book);
-                    }
+    public String deleteBook(Long libraryId, Long bookId){
+        for (Library library:Database.libraries){
+            if (library.getId().equals(libraryId)){
+                for (Book book : Database.books) {
+            if (book.getId().equals(bookId)) {
+                Database.books.remove(book);
+                return "Book with ID " + bookId + " deleted successfully.";
+
+                  }
                 }
             }
         }
-        return null;
+        return "Book with ID " + bookId + " not found.";
     }
 
     @Override
     public void clearBooksByLibraryId(Long libraryId) {
-        for (Library library:libraries){
-            if (library.getId()==libraryId){
-                libraries.clear();
+        for (Library library:Database.libraries){
+            if (library.getId().equals(libraryId)){
+                Database.books.clear();
             }
         }
     }
