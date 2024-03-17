@@ -137,8 +137,10 @@ public class MainMethod {
                     }
                     //TODO Delete book by ID
                     case 4 -> {
-                        System.out.println("Write Library Id and book Id: ");
-                        System.out.println(bookService.deleteBook(scanner.nextLong(), scanner.nextLong()));
+                        System.out.println("Write the ID of the library: ");
+                        long libID =scanner.nextLong();
+                        System.out.println("Write the ID of the book: ");
+                        System.out.println(bookService.deleteBook(libID, scanner.nextLong()));
                     }
                     case 5 -> {
                         System.out.println("Write the ID of the library: ");

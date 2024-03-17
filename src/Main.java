@@ -13,6 +13,8 @@ public class Main {
 
         while (true) {
             System.out.println("""
+                    First, you need to add a library.
+                    
                     1.Library
                     2.Book
                     3.Reader
