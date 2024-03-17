@@ -1,6 +1,8 @@
 package model;
 
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Library {
     private Long id;
@@ -32,16 +34,42 @@ public class Library {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName() {
+        boolean isTrue =true;
+        while (isTrue) {
+            try {
+            System.out.println("Write the name of the library: ");
+            String libraryName = new Scanner(System.in).nextLine();
+            if (libraryName.matches(".*\\d.*")) {
+                throw new InputMismatchException("The name of the library consists of letters  ");
+            }
+            this.name=libraryName;
+            isTrue=false;
+            }catch (InputMismatchException e){
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress() {
+        boolean isTrue = true;
+        while (isTrue) {
+            try {
+                System.out.println("Write the address of the library");
+                String address = new Scanner(System.in).nextLine();
+                if (address.matches(".*\\d.*")) {
+                    throw new InputMismatchException("Write  the address of the library! ");
+                }
+                this.address=address;
+                isTrue=false;
+            }catch (InputMismatchException e){
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
     public List<Book> getBooks() {

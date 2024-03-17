@@ -39,7 +39,7 @@ public class LibraryServiceImpl implements LibraryService {
                 return library;
             }
         }
-        return library;
+        return null;
     }
     @Override
     public String deleteLibrary(Long id) {

@@ -24,25 +24,23 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public Reader getReaderById(Long id) {
-        Reader reader1 = new Reader();
         for (Reader reader:Database.readers){
             if (reader.getId().equals(id)){
-               reader1 = reader;
-            }else {
-                System.out.println("Not found!");
+               return reader;
             }
         }
-        return reader1;
+        return null;
     }
-
     @Override
     public Reader updateReader(Long id, Reader reader) {
-        for (Reader reader1:Database.readers){
-            if(reader1.getId().equals(id)){
-                Database.readers.set(0,reader);
+        for (int i = 0; i <Database.readers.size(); i++) {
+            if (Database.readers.get(i).getId().equals(id)){
+                Database.readers.set(i,reader);
+                return reader;
             }
-        }
-        return reader;
+
+        }System.out.println("Successfully updated");
+        return null;
     }
 
     @Override
@@ -51,7 +49,7 @@ public class ReaderServiceImpl implements ReaderService {
             if(reader.getId().equals(libraryId)){
                 for (Library library:Database.libraries){
                     if(library.getId().equals(libraryId)){
-                        library.getReaders().add(reader);
+                        library.setReaders(Database.readers);
                     }
                 }
             }

@@ -17,6 +17,7 @@ public class BookServiceImpl implements BookService {
             }
         }
         return book;
+
     }
 
     @Override
@@ -26,7 +27,7 @@ public class BookServiceImpl implements BookService {
                 return Database.books;
             }
         }
-        return null;
+        return Database.books;
     }
 
     @Override
